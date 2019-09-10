@@ -12,24 +12,62 @@
   </head>
 
   <body>
-    <header class="header">
-      <div class="container">
-        <nav class="level">
-          <div class="level-left">
-            <div class="level-item">
-              Agenda
+    <section class="hero is-primary is-small is-bold">
+      <div class="hero-head">
+        <nav class="navbar">
+          <div class="container">
+            <div class="navbar-brand">
+              <a class="navbar-item">
+                <img src="https://bulma.io/images/bulma-type-white.png" alt="Logo">
+              </a>
+              <span class="navbar-burger burger" data-target="navbarMenuHeroB">
+                <span></span>
+                <span></span>
+                <span></span>
+              </span>
             </div>
-          </div>
-          <div class="level-right">
-            <p class="level-item">
-              <%= link_to("Inicio", root_path, :class => "button is-dark is-outlined") %>
-              <%= link_to("Cosas por hacer", todos_path, :class => "button is-dark is-outlined") %>
-              <%= link_to("Lista de Contactos", contacts_path, :class => "button is-dark is-outlined") %>
-            </p>
           </div>
         </nav>
       </div>
-    </header>
+
+      <div class="hero-body">
+        <div class="container has-text-centered">
+          <p class="title">
+            Agenda
+          </p>
+        </div>
+      </div>
+
+      <div class="hero-foot">
+        <nav class="tabs is-boxed is-fullwidth is-large">
+          <div class="container">
+            <ul>
+              <%
+              @is_active_home = ''
+              @is_active_todos = ''
+              @is_active_contacts = ''
+              if controller.controller_name == "main"
+                @is_active_home = 'is-active'
+              elsif controller.controller_name == "todos"
+                @is_active_todos = 'is-active'
+              elsif controller.controller_name == "contacts" 
+                @is_active_contacts = 'is-active'
+              end
+              %>
+              <li class="<%=@is_active_home %>">
+                <%= link_to("Inicio", root_path) %>
+              </li>
+              <li class="<%=@is_active_todos %>">
+                <%= link_to("Cosas por hacer", todos_path) %>
+              </li>
+              <li class="<%=@is_active_contacts %>">
+                <%= link_to("Lista de Contactos", contacts_path) %>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </section>
     <section class="section">
       <div class="container">
         <%= yield %>
